@@ -2,8 +2,9 @@
 Change NavigationBar's transparency at pop gestrue and other situation
 
 ![image](https://github.com/EnderTan/ETNavBarTransparentDemo/blob/master/navDemo.gif)
-####使用方法
+###使用方法
 1、把ET_NavBarTransparent.swift导入到项目中
+
 2、在需要的地方修改导航栏透明度和navigationItem的颜色：
 ```
     override func viewDidLoad() {
@@ -25,5 +26,5 @@ Change NavigationBar's transparency at pop gestrue and other situation
         
     }
 ```
-####相关文章
+###相关文章
 http://www.jianshu.com/p/454b06590cf1
