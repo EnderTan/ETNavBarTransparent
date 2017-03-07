@@ -54,7 +54,6 @@ extension UINavigationController {
                 let fromAlpha = coor?.viewController(forKey: .from)?.navBarBgAlpha
                 let toAlpha = coor?.viewController(forKey: .to)?.navBarBgAlpha
                 let nowAlpha = fromAlpha! + (toAlpha!-fromAlpha!)*percentComplete
-                print("from:\(fromAlpha) to:\(toAlpha) now:\(nowAlpha)")
                 
                 self.setNeedsNavigationBackground(alpha: nowAlpha)
                 
@@ -128,6 +127,7 @@ extension UINavigationController:UINavigationControllerDelegate,UINavigationBarD
                             self.navigationBar.tintColor = context.viewController(forKey: .to)?.navBarTintColor
                         })
                     }
+ 
                 })
             }
             
@@ -185,8 +185,11 @@ extension UIViewController {
             if alpha < 0 {
                 alpha = 0
             }
-            navigationController?.setNeedsNavigationBackground(alpha: alpha)
+            
             objc_setAssociatedObject(self, &AssociatedKeys.navBarBgAlpha, alpha, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            
+            //设置UI
+            navigationController?.setNeedsNavigationBackground(alpha: alpha)
         }
     }
     
