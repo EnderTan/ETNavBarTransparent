@@ -17,4 +17,6 @@ Change NavigationBar's transparency at pop gestrue and other situation
         self.navBarBgAlpha = 0
         self.navBarTintColor = .white
     }
-    ```
+```
+####相关文章
+http://www.jianshu.com/p/454b06590cf1
