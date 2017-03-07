@@ -9,13 +9,20 @@ Change NavigationBar's transparency at pop gestrue and other situation
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        automaticallyAdjustsScrollViewInsets = false
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        
         self.navBarBgAlpha = 0
         self.navBarTintColor = .white
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if scrollView.contentOffset.y > 100 {
+            navBarBgAlpha = 1
+            navBarTintColor = UIColor.gray
+        }else{
+            navBarBgAlpha = 0
+            navBarTintColor = UIColor.white
+        }
+        
     }
 ```
 ####相关文章
