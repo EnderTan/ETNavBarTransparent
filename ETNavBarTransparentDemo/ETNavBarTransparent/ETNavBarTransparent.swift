@@ -1,5 +1,5 @@
 //
-//  ET_NavBarTransparent.swift
+//  ETNavBarTransparent.swift
 //  ETNavBarTransparentDemo
 //
 //  Created by Bing on 2017/3/1.

@@ -13,7 +13,7 @@
 		373664FC1E6E9BE000239537 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 373664FA1E6E9BE000239537 /* LaunchScreen.storyboard */; };
 		3736650D1E6E9C8E00239537 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3736650B1E6E9C8E00239537 /* MainViewController.swift */; };
 		3736650E1E6E9C8E00239537 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3736650C1E6E9C8E00239537 /* ProfileViewController.swift */; };
-		377445D21E6E9DFC001E3BAD /* ET_NavBarTransparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377445D11E6E9DFC001E3BAD /* ET_NavBarTransparent.swift */; };
+		378A88981E7063C1008AE1EC /* ETNavBarTransparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378A88971E7063C1008AE1EC /* ETNavBarTransparent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,7 @@
 		373664FD1E6E9BE000239537 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3736650B1E6E9C8E00239537 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3736650C1E6E9C8E00239537 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		377445D11E6E9DFC001E3BAD /* ET_NavBarTransparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ET_NavBarTransparent.swift; sourceTree = "<group>"; };
+		378A88971E7063C1008AE1EC /* ETNavBarTransparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETNavBarTransparent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +58,7 @@
 		373664F01E6E9BE000239537 /* ETNavBarTransparentDemo */ = {
 			isa = PBXGroup;
 			children = (
-				377445D01E6E9DFC001E3BAD /* ET_NavBarTransparent */,
+				378A88961E7063C1008AE1EC /* ETNavBarTransparent */,
 				373664F11E6E9BE000239537 /* AppDelegate.swift */,
 				3736650B1E6E9C8E00239537 /* MainViewController.swift */,
 				3736650C1E6E9C8E00239537 /* ProfileViewController.swift */,
@@ -70,12 +70,12 @@
 			path = ETNavBarTransparentDemo;
 			sourceTree = "<group>";
 		};
-		377445D01E6E9DFC001E3BAD /* ET_NavBarTransparent */ = {
+		378A88961E7063C1008AE1EC /* ETNavBarTransparent */ = {
 			isa = PBXGroup;
 			children = (
-				377445D11E6E9DFC001E3BAD /* ET_NavBarTransparent.swift */,
+				378A88971E7063C1008AE1EC /* ETNavBarTransparent.swift */,
 			);
-			path = ET_NavBarTransparent;
+			path = ETNavBarTransparent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,7 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3736650D1E6E9C8E00239537 /* MainViewController.swift in Sources */,
-				377445D21E6E9DFC001E3BAD /* ET_NavBarTransparent.swift in Sources */,
+				378A88981E7063C1008AE1EC /* ETNavBarTransparent.swift in Sources */,
 				3736650E1E6E9C8E00239537 /* ProfileViewController.swift in Sources */,
 				373664F21E6E9BE000239537 /* AppDelegate.swift in Sources */,
 			);
