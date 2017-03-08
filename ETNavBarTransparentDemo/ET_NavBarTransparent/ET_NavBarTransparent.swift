@@ -107,33 +107,43 @@ extension UINavigationController:UINavigationControllerDelegate,UINavigationBarD
         if topVC != nil {
             let coor = topVC?.transitionCoordinator
             if coor != nil {
-                coor?.notifyWhenInteractionChanges({ (context) in
+                
+                if #available(iOS 10.0, *) {
+                    coor?.notifyWhenInteractionChanges({ (context) in
+                    self.dealInteractionChanges(context)
+                    })
+                } else {
+                    coor?.notifyWhenInteractionEnds({ (context) in
+                        self.dealInteractionChanges(context)
+                    })
                     
-                    if context.isCancelled {
-                        let cancellDuration:TimeInterval = context.transitionDuration * Double( context.percentComplete)
-                        UIView.animate(withDuration: cancellDuration, animations: {
-                            
-                            let nowAlpha = (context.viewController(forKey: .from)?.navBarBgAlpha)!
-                            self.setNeedsNavigationBackground(alpha: nowAlpha)
-                            
-                            self.navigationBar.tintColor = context.viewController(forKey: .from)?.navBarTintColor
-                        })
-                    }else{
-                        let finishDuration:TimeInterval = context.transitionDuration * Double(1 - context.percentComplete)
-                        UIView.animate(withDuration: finishDuration, animations: {
-                            let nowAlpha = (context.viewController(forKey: .to)?.navBarBgAlpha)!
-                            self.setNeedsNavigationBackground(alpha: nowAlpha)
-                            
-                            self.navigationBar.tintColor = context.viewController(forKey: .to)?.navBarTintColor
-                        })
-                    }
- 
-                })
+                } 
+
             }
             
         }
     }
     
+    private func dealInteractionChanges(_ context:UIViewControllerTransitionCoordinatorContext) {
+        if context.isCancelled {
+            let cancellDuration:TimeInterval = context.transitionDuration * Double( context.percentComplete)
+            UIView.animate(withDuration: cancellDuration, animations: {
+                
+                let nowAlpha = (context.viewController(forKey: .from)?.navBarBgAlpha)!
+                self.setNeedsNavigationBackground(alpha: nowAlpha)
+                
+                self.navigationBar.tintColor = context.viewController(forKey: .from)?.navBarTintColor
+            })
+        }else{
+            let finishDuration:TimeInterval = context.transitionDuration * Double(1 - context.percentComplete)
+            UIView.animate(withDuration: finishDuration, animations: {
+                let nowAlpha = (context.viewController(forKey: .to)?.navBarBgAlpha)!
+                self.setNeedsNavigationBackground(alpha: nowAlpha)
+                
+                self.navigationBar.tintColor = context.viewController(forKey: .to)?.navBarTintColor
+            })
+        }
+    }
     
     
     
