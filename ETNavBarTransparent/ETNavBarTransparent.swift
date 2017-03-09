@@ -177,7 +177,7 @@ extension UIViewController {
         static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor()
     }
     
-    var navBarBgAlpha: CGFloat {
+    open var navBarBgAlpha: CGFloat {
         get {
             let alpha = objc_getAssociatedObject(self, &AssociatedKeys.navBarBgAlpha) as? CGFloat
             if alpha == nil {
@@ -203,7 +203,7 @@ extension UIViewController {
         }
     }
     
-    var navBarTintColor: UIColor {
+    open var navBarTintColor: UIColor {
         get {
             let tintColor = objc_getAssociatedObject(self, &AssociatedKeys.navBarTintColor) as? UIColor
             if tintColor == nil {
