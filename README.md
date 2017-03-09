@@ -1,12 +1,25 @@
-# ETNavBarTransparentDemo
+# ETNavBarTransparent
 Change NavigationBar's transparency at pop gestrue and other situation
-
+###Screenshots
 ![image](https://github.com/EnderTan/ETNavBarTransparentDemo/blob/master/navDemo.gif)
-###使用方法
-1、把ET_NavBarTransparent.swift导入到项目中
 
-2、在需要的地方修改导航栏透明度和navigationItem的颜色：
+###Installation
+Add the following line to your Podfile:
 ```
+pod 'ETNavBarTransparent'
+```
+Then, run the following command:
+```
+$ pod install
+```
+
+Or,Simply drag "ET_NavBarTransparent.swift" to your project
+
+###Usage
+Change NavigationBar's transparency and tintColor where you want:
+```
+    //Example：
+    //Change in viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -14,11 +27,12 @@ Change NavigationBar's transparency at pop gestrue and other situation
         self.navBarTintColor = .white
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    //Change in scrollView scroll
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if scrollView.contentOffset.y > 100 {
             navBarBgAlpha = 1
-            navBarTintColor = UIColor.gray
+            navBarTintColor = UIColor.defaultNavBarTintColor()
         }else{
             navBarBgAlpha = 0
             navBarTintColor = UIColor.white
@@ -26,5 +40,7 @@ Change NavigationBar's transparency at pop gestrue and other situation
         
     }
 ```
-###相关文章
+
+
+###Related articles
 http://www.jianshu.com/p/454b06590cf1
