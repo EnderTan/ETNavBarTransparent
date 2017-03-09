@@ -122,6 +122,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="u0R-A3-Ew3" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pcp-ES-lp5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

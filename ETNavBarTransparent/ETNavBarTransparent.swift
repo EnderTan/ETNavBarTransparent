@@ -90,10 +90,17 @@ extension UINavigationController {
     
     fileprivate func setNeedsNavigationBackground(alpha:CGFloat) {
         let barBackgroundView = navigationBar.value(forKey: "_barBackgroundView") as AnyObject
-        let backgroundEffectView = barBackgroundView.value(forKey: "_backgroundEffectView") as! UIVisualEffectView
-        let shadowView = barBackgroundView.value(forKey: "_shadowView") as! UIView
-        backgroundEffectView.alpha = alpha
-        shadowView.alpha = alpha
+        if navigationBar.isTranslucent {
+            if let backgroundEffectView = barBackgroundView.value(forKey: "_backgroundEffectView") as? UIView {
+                backgroundEffectView.alpha = alpha
+            }
+        }else{
+            (barBackgroundView as! UIView).alpha = alpha
+        }
+        
+        if let shadowView = barBackgroundView.value(forKey: "_shadowView") as? UIView {
+            shadowView.alpha = alpha
+        }
         
     }
     
