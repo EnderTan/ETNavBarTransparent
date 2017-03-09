@@ -43,4 +43,5 @@ Change NavigationBar's transparency and tintColor where you want:
 
 
 ###Related articles
-http://www.jianshu.com/p/454b06590cf1
+[导航栏的平滑显示和隐藏 - 个人页的自我修养（1）](http://www.jianshu.com/p/454b06590cf1)
+
