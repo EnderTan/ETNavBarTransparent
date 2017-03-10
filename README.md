@@ -49,4 +49,4 @@ Change NavigationBar's transparency and tintColor where you want:
 MIT license. See LICENSE for details.
 
 ##Contact
-Follow and contact me on[Weibo](http://weibo.com/endertan) or [Blog](http://www.jianshu.com/u/a958e552973b)
+Follow and contact me on Weibo [@日光镇](http://weibo.com/endertan) or [My Blog](http://www.jianshu.com/u/a958e552973b)
