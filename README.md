@@ -3,7 +3,7 @@ Change NavigationBar's transparency at pop gestrue and other situation
 ###Screenshots
 ![image](https://github.com/EnderTan/ETNavBarTransparentDemo/blob/master/navDemo.gif)
 
-###Installation
+##Installation
 Add the following line to your Podfile:
 ```
 pod 'ETNavBarTransparent'
@@ -15,7 +15,7 @@ $ pod install
 
 Or,Simply drag "ET_NavBarTransparent.swift" to your project
 
-###Usage
+##Usage
 Change NavigationBar's transparency and tintColor where you want:
 ```
     //Example：
@@ -42,8 +42,11 @@ Change NavigationBar's transparency and tintColor where you want:
 ```
 
 
-###Related articles
+##Related articles
 [导航栏的平滑显示和隐藏 - 个人页的自我修养（1）](http://www.jianshu.com/p/454b06590cf1)
 
-###License
-ETNavBarTransparent is released under the MIT license. See LICENSE for details.
+##License
+MIT license. See LICENSE for details.
+
+##Contact
+Follow and contact me on[Weibo](http://weibo.com/endertan) or [Blog](http://www.jianshu.com/u/a958e552973b)
