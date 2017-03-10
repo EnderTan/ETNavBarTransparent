@@ -89,23 +89,35 @@ extension UINavigationController {
     }
     
     fileprivate func setNeedsNavigationBackground(alpha:CGFloat) {
-        let barBackgroundView = navigationBar.value(forKey: "_barBackgroundView") as AnyObject
-        let backgroundImageView = barBackgroundView.value(forKey: "_backgroundImageView") as? UIImageView
-        if navigationBar.isTranslucent {
-            if backgroundImageView != nil && backgroundImageView!.image != nil {
-                (barBackgroundView as! UIView).alpha = alpha
-            }else{
-                if let backgroundEffectView = barBackgroundView.value(forKey: "_backgroundEffectView") as? UIView {
-                    backgroundEffectView.alpha = alpha
-                }
-            }
-        }else{
-            (barBackgroundView as! UIView).alpha = alpha
-        }
+
         
+        let barBackgroundView = navigationBar.subviews[0]
         if let shadowView = barBackgroundView.value(forKey: "_shadowView") as? UIView {
             shadowView.alpha = alpha
         }
+        
+        if navigationBar.isTranslucent {
+            if #available(iOS 10.0, *){
+                if navigationBar.backgroundImage(for: .default) == nil {
+                    if let backgroundEffectView = barBackgroundView.value(forKey: "_backgroundEffectView") as? UIView {
+                        backgroundEffectView.alpha = alpha
+                        return
+                    }
+                }
+
+            }else{
+                if let adaptiveBackdrop = barBackgroundView.value(forKey: "_adaptiveBackdrop") as? UIView {
+                    if let backdropEffectView = adaptiveBackdrop.value(forKey: "_backdropEffectView") as? UIView {
+                        backdropEffectView.alpha = alpha
+                        return
+                    }
+                }
+            }
+            
+
+        }
+        
+        barBackgroundView.alpha = alpha
         
     }
     
@@ -160,6 +172,7 @@ extension UINavigationController:UINavigationControllerDelegate,UINavigationBarD
     
     
     public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
+        
         if viewControllers.count >= (navigationBar.items?.count)! {
             let popToVC = viewControllers[viewControllers.count-2]
             setNeedsNavigationBackground(alpha: (popToVC.navBarBgAlpha))
@@ -210,7 +223,7 @@ extension UIViewController {
             
             objc_setAssociatedObject(self, &AssociatedKeys.navBarBgAlpha, alpha, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
-            //设置UI
+            //Update UI
             navigationController?.setNeedsNavigationBackground(alpha: alpha)
         }
     }
