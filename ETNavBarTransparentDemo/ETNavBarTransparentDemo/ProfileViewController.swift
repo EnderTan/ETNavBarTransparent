@@ -34,6 +34,16 @@ class ProfileViewController: UIViewController {
             return .default
         }
     }
+    
+    
+
+    @IBAction func popWithCodeAction(_ sender: UIButton) {
+        _ = navigationController?.popViewController(animated: true)
+    }
+
+    @IBAction func popToRootAction(_ sender: UIButton) {
+        _ = navigationController?.popToRootViewController(animated: true)
+    }
 
     
 }
