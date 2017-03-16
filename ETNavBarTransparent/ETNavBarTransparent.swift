@@ -85,7 +85,7 @@ extension UINavigationController {
         let nowColor = averageColor(fromColor: fromColor, toColor: toColor, percent: percentComplete)
         navigationBar.tintColor = nowColor
     }
-    
+
     //Calculate the middle Color with translation percent
     private func averageColor(fromColor:UIColor, toColor:UIColor, percent:CGFloat) -> UIColor {
         var fromRed: CGFloat = 0.0
@@ -113,43 +113,38 @@ extension UINavigationController {
         navigationBar.tintColor = viewController.navBarTintColor
         return et_popToViewController(viewController, animated: animated)
     }
-    
+
     func et_popToRootViewController(animated: Bool) -> [UIViewController]? {
         setNeedsNavigationBackground(alpha: viewControllers.first?.navBarBgAlpha ?? 0)
         navigationBar.tintColor = viewControllers.first?.navBarTintColor
         return et_popToRootViewController(animated: animated)
     }
     
-    fileprivate func setNeedsNavigationBackground(alpha:CGFloat) {
+    fileprivate func setNeedsNavigationBackground(alpha: CGFloat) {
         
         let barBackgroundView = navigationBar.subviews[0]
-        if let shadowView = barBackgroundView.value(forKey: "_shadowView") as? UIView {
+
+        let valueForKey = barBackgroundView.value(forKey:)
+
+        if let shadowView = valueForKey("_shadowView") as? UIView {
             shadowView.alpha = alpha
         }
-        
+
         if navigationBar.isTranslucent {
-            if #available(iOS 10.0, *){
-                guard navigationBar.backgroundImage(for: .default) == nil else {
-                    return
-                }
-                
-                if let backgroundEffectView = barBackgroundView.value(forKey: "_backgroundEffectView") as? UIView {
+            if #available(iOS 10.0, *) {
+                if let backgroundEffectView = valueForKey("_backgroundEffectView") as? UIView, navigationBar.backgroundImage(for: .default) == nil {
                     backgroundEffectView.alpha = alpha
                     return
                 }
-                
-            }else{
-                guard let adaptiveBackdrop = barBackgroundView.value(forKey: "_adaptiveBackdrop") as? UIView else {
-                    return
-                }
-                
-                if let backdropEffectView = adaptiveBackdrop.value(forKey: "_backdropEffectView") as? UIView {
+
+            } else {
+                if let adaptiveBackdrop = valueForKey("_adaptiveBackdrop") as? UIView , let backdropEffectView = adaptiveBackdrop.value(forKey: "_backdropEffectView") as? UIView {
                     backdropEffectView.alpha = alpha
                     return
                 }
             }
         }
-        
+
         barBackgroundView.alpha = alpha
     }
 }
@@ -179,7 +174,7 @@ extension UINavigationController: UINavigationControllerDelegate,UINavigationBar
             
             self.navigationBar.tintColor = context.viewController(forKey: $0)?.navBarTintColor
         }
-        
+
         if context.isCancelled {
             let cancellDuration: TimeInterval = context.transitionDuration * Double(context.percentComplete)
             UIView.animate(withDuration: cancellDuration, animations: {
@@ -223,7 +218,6 @@ extension UIViewController {
     
     open var navBarBgAlpha: CGFloat {
         get {
-            
             guard let alpha = objc_getAssociatedObject(self, &AssociatedKeys.navBarBgAlpha) as? CGFloat else {
                 return 1.0
             }
@@ -231,16 +225,10 @@ extension UIViewController {
             
         }
         set {
-            var alpha = newValue
-            if alpha > 1 {
-                alpha = 1
-            }
-            if alpha < 0 {
-                alpha = 0
-            }
-            
+            let alpha = max(min(newValue, 1), 0) // 必须在 0~1的范围
+
             objc_setAssociatedObject(self, &AssociatedKeys.navBarBgAlpha, alpha, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            
+
             //Update UI
             navigationController?.setNeedsNavigationBackground(alpha: alpha)
         }
