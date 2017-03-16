@@ -87,7 +87,7 @@ extension ProfileViewController: UITableViewDelegate {
             }
             navBarBgAlpha = navAlpha
             if navAlpha > 0.8 {
-                navBarTintColor = UIColor.defaultNavBarTintColor()
+                navBarTintColor = UIColor.defaultNavBarTintColor
                 statusBarShouldLight = false
                 
             }else{

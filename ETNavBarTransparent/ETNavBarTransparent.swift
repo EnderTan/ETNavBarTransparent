@@ -18,7 +18,7 @@ extension UIColor {
 extension DispatchQueue {
     
     private static var _onceTracker = [String]()
-    
+
     public class func once(token: String, block: () -> Void) {
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
@@ -233,7 +233,7 @@ extension UIViewController {
             navigationController?.setNeedsNavigationBackground(alpha: alpha)
         }
     }
-    
+
     open var navBarTintColor: UIColor {
         get {
             guard let tintColor = objc_getAssociatedObject(self, &AssociatedKeys.navBarTintColor) as? UIColor else {
