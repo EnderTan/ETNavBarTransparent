@@ -111,7 +111,7 @@
 				TargetAttributes = {
 					373664ED1E6E9BE000239537 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = NAC5X5LCW4;
+						DevelopmentTeam = 46A8679957;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -278,7 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = NAC5X5LCW4;
+				DEVELOPMENT_TEAM = 46A8679957;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ETNavBarTransparentDemo",
@@ -296,7 +296,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = NAC5X5LCW4;
+				DEVELOPMENT_TEAM = 46A8679957;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ETNavBarTransparentDemo",

@@ -26,7 +26,7 @@ class ProfileViewController: UIViewController {
         self.navBarBgAlpha = 0
         self.navBarTintColor = .white
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if statusBarShouldLight {
             return .lightContent
@@ -69,11 +69,18 @@ extension ProfileViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let conroller = MainViewController()
+        conroller.view.backgroundColor = .white
+        
+        navigationController?.pushViewController(conroller, animated: true)
     }
     
     
     //MARK:UIScrollViewDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        
+        print(scrollView)
         
         let contentOffsetY = scrollView.contentOffset.y
         let showNavBarOffsetY = 200 - topLayoutGuide.length
