@@ -125,9 +125,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="n9U-tc-dtG" kind="push" id="UY3-SF-NWG"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -169,7 +166,4 @@
             <point key="canvasLocation" x="-242.40000000000001" y="-560.86956521739137"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="1iW-PF-UDj"/>
-    </inferredMetricsTieBreakers>
 </document>
