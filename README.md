@@ -22,29 +22,28 @@ Or, simply drag `ET_NavBarTransparent.swift` to your project.
 Change NavigationBar's transparency and tintColor where you want:
 
 ```swift
-    // Example：
-    // Change in viewDidLoad
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.navBarBgAlpha = 0
-        self.navBarTintColor = .white
-    }
-    
-    // Change in scrollView scroll
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        if scrollView.contentOffset.y > 100 {
-            navBarBgAlpha = 1
-            navBarTintColor = UIColor.defaultNavBarTintColor()
-        } else {
-            navBarBgAlpha = 0
-            navBarTintColor = .white
-        }
-        
-    }
-```
+// Example：
+// Change in viewDidLoad
+override func viewDidLoad() {
+    super.viewDidLoad()
 
+    self.navBarBgAlpha = 0
+    self.navBarTintColor = .white
+}
+
+// Change in scrollView scroll
+func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+    if scrollView.contentOffset.y > 100 {
+        navBarBgAlpha = 1
+        navBarTintColor = UIColor.defaultNavBarTintColor()
+    } else {
+        navBarBgAlpha = 0
+        navBarTintColor = .white
+    }
+
+}
+```
 
 ## Related articles
 [导航栏的平滑显示和隐藏 - 个人页的自我修养（1）](http://www.jianshu.com/p/454b06590cf1)
