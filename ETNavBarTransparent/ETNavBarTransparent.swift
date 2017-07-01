@@ -38,9 +38,14 @@ extension UINavigationController {
         return topViewController?.preferredStatusBarStyle ?? .default
     }
     
+    open override func viewDidLoad() {
+        UINavigationController.swizzle()
+        super.viewDidLoad()
+    }
+    
     private static let onceToken = UUID().uuidString
     
-    open override class func initialize() {
+    class func swizzle() {
       guard self == UINavigationController.self else { return }
       
       DispatchQueue.once(token: onceToken) {
@@ -126,6 +131,7 @@ extension UINavigationController {
         
         if let shadowView = valueForKey("_shadowView") as? UIView {
             shadowView.alpha = alpha
+            shadowView.isHidden = alpha == 0
         }
         
         if navigationBar.isTranslucent {

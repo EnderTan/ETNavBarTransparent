@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController {
         
         self.navBarBgAlpha = 0
         self.navBarTintColor = .white
+        
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
