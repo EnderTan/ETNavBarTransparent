@@ -62,7 +62,7 @@ extension UINavigationController {
           
           let originalMethod = class_getInstanceMethod(self, selector)
           let swizzledMethod = class_getInstanceMethod(self, Selector(str))
-          method_exchangeImplementations(originalMethod, swizzledMethod)
+            method_exchangeImplementations(originalMethod!, swizzledMethod!)
         }
       }
     }
