@@ -46,28 +46,30 @@ extension UINavigationController {
     private static let onceToken = UUID().uuidString
     
     class func swizzle() {
-      guard self == UINavigationController.self else { return }
-      
-      DispatchQueue.once(token: onceToken) {
-        let needSwizzleSelectorArr = [
-          NSSelectorFromString("_updateInteractiveTransition:"),
-          #selector(popToViewController),
-          #selector(popToRootViewController)
-        ]
+        guard self == UINavigationController.self else { return }
         
-        for selector in needSwizzleSelectorArr {
-          
-          let str = ("et_" + selector.description).replacingOccurrences(of: "__", with: "_")
-          // popToRootViewControllerAnimated: et_popToRootViewControllerAnimated:
-          
-          let originalMethod = class_getInstanceMethod(self, selector)
-          let swizzledMethod = class_getInstanceMethod(self, Selector(str))
-            method_exchangeImplementations(originalMethod!, swizzledMethod!)
+        DispatchQueue.once(token: onceToken) {
+            let needSwizzleSelectorArr = [
+                NSSelectorFromString("_updateInteractiveTransition:"),
+                #selector(popToViewController),
+                #selector(popToRootViewController)
+            ]
+            
+            for selector in needSwizzleSelectorArr {
+                
+                let str = ("et_" + selector.description).replacingOccurrences(of: "__", with: "_")
+                // popToRootViewControllerAnimated: et_popToRootViewControllerAnimated:
+                
+                let originalMethod = class_getInstanceMethod(self, selector)
+                let swizzledMethod = class_getInstanceMethod(self, Selector(str))
+                if originalMethod != nil && swizzledMethod != nil {
+                    method_exchangeImplementations(originalMethod!, swizzledMethod!)
+                }
+            }
         }
-      }
     }
-  
-    func et_updateInteractiveTransition(_ percentComplete: CGFloat) {
+    
+    @objc func et_updateInteractiveTransition(_ percentComplete: CGFloat) {
         guard let topViewController = topViewController, let coordinator = topViewController.transitionCoordinator else {
             et_updateInteractiveTransition(percentComplete)
             return
@@ -113,13 +115,13 @@ extension UINavigationController {
         return UIColor(red: nowRed, green: nowGreen, blue: nowBlue, alpha: nowAlpha)
     }
     
-    func et_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
+    @objc func et_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         setNeedsNavigationBackground(alpha: viewController.navBarBgAlpha)
         navigationBar.tintColor = viewController.navBarTintColor
         return et_popToViewController(viewController, animated: animated)
     }
     
-    func et_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]? {
+    @objc func et_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]? {
         setNeedsNavigationBackground(alpha: viewControllers.first?.navBarBgAlpha ?? 0)
         navigationBar.tintColor = viewControllers.first?.navBarTintColor
         return et_popToRootViewControllerAnimated(animated)
