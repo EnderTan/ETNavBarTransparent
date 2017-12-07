@@ -15,7 +15,7 @@ Then, run the following command:
 $ pod install
 ```
 
-Or, simply drag `ET_NavBarTransparent.swift` to your project.
+Or, simply drag `ETNavBarTransparent.swift` to your project.
 
 ## Usage
 
