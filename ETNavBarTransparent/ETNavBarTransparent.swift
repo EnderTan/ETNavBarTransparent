@@ -128,30 +128,32 @@ extension UINavigationController {
     }
     
     fileprivate func setNeedsNavigationBackground(alpha: CGFloat) {
-        let barBackgroundView = navigationBar.subviews[0]
-        let valueForKey = barBackgroundView.value(forKey:)
-        
-        if let shadowView = valueForKey("_shadowView") as? UIView {
-            shadowView.alpha = alpha
-            shadowView.isHidden = alpha == 0
-        }
-        
-        if navigationBar.isTranslucent {
-            if #available(iOS 10.0, *) {
-                if let backgroundEffectView = valueForKey("_backgroundEffectView") as? UIView, navigationBar.backgroundImage(for: .default) == nil {
-                    backgroundEffectView.alpha = alpha
-                    return
-                }
-                
-            } else {
-                if let adaptiveBackdrop = valueForKey("_adaptiveBackdrop") as? UIView , let backdropEffectView = adaptiveBackdrop.value(forKey: "_backdropEffectView") as? UIView {
-                    backdropEffectView.alpha = alpha
-                    return
+        if let barBackgroundView = navigationBar.subviews.first {
+            let valueForKey = barBackgroundView.value(forKey:)
+            
+            if let shadowView = valueForKey("_shadowView") as? UIView {
+                shadowView.alpha = alpha
+                shadowView.isHidden = alpha == 0
+            }
+            
+            if navigationBar.isTranslucent {
+                if #available(iOS 10.0, *) {
+                    if let backgroundEffectView = valueForKey("_backgroundEffectView") as? UIView, navigationBar.backgroundImage(for: .default) == nil {
+                        backgroundEffectView.alpha = alpha
+                        return
+                    }
+                    
+                } else {
+                    if let adaptiveBackdrop = valueForKey("_adaptiveBackdrop") as? UIView , let backdropEffectView = adaptiveBackdrop.value(forKey: "_backdropEffectView") as? UIView {
+                        backdropEffectView.alpha = alpha
+                        return
+                    }
                 }
             }
+            
+            barBackgroundView.alpha = alpha
         }
         
-        barBackgroundView.alpha = alpha
     }
 }
 
