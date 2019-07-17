@@ -51,8 +51,9 @@ extension UINavigationController {
         DispatchQueue.once(token: onceToken) {
             let needSwizzleSelectorArr = [
                 NSSelectorFromString("_updateInteractiveTransition:"),
-                #selector(popToViewController),
-                #selector(popToRootViewController)
+                #selector(popViewController(animated:)),
+                #selector(popToViewController(_:animated:)),
+                #selector(popToRootViewController(animated:))
             ]
             
             for selector in needSwizzleSelectorArr {
@@ -73,6 +74,16 @@ extension UINavigationController {
         guard let topViewController = topViewController, let coordinator = topViewController.transitionCoordinator else {
             et_updateInteractiveTransition(percentComplete)
             return
+        }
+        
+        if #available(iOS 10.0, *) {
+            coordinator.notifyWhenInteractionChanges({ (context) in
+                self.dealInteractionChanges(context)
+            })
+        } else {
+            coordinator.notifyWhenInteractionEnds({ (context) in
+                self.dealInteractionChanges(context)
+            })
         }
         
         let fromViewController = coordinator.viewController(forKey: .from)
@@ -121,6 +132,17 @@ extension UINavigationController {
         return et_popToViewController(viewController, animated: animated)
     }
     
+    @objc func et_popViewControllerAnimated(_ animated: Bool) -> UIViewController? {
+        if #available(iOS 13.0, *) {
+            if (viewControllers.count > 1 && interactivePopGestureRecognizer?.state != .began){
+                let popToVC = viewControllers[viewControllers.count - 2]
+                setNeedsNavigationBackground(alpha: popToVC.navBarBgAlpha)
+                navigationBar.tintColor = popToVC.navBarTintColor
+            }
+        }
+        return et_popViewControllerAnimated(animated)
+    }
+    
     @objc func et_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]? {
         setNeedsNavigationBackground(alpha: viewControllers.first?.navBarBgAlpha ?? 0)
         navigationBar.tintColor = viewControllers.first?.navBarTintColor
@@ -129,7 +151,7 @@ extension UINavigationController {
     
     fileprivate func setNeedsNavigationBackground(alpha: CGFloat) {
         if let barBackgroundView = navigationBar.subviews.first {
-            let valueForKey = barBackgroundView.value(forKey:)
+            let valueForKey = barBackgroundView.getIvar(forKey:)
             
             if let shadowView = valueForKey("_shadowView") as? UIView {
                 shadowView.alpha = alpha
@@ -157,6 +179,16 @@ extension UINavigationController {
     }
 }
 
+extension NSObject {
+    func getIvar(forKey key: String) -> Any? {
+        guard let _var = class_getInstanceVariable(type(of: self), key) else {
+            return nil
+        }
+        
+        return object_getIvar(self, _var)
+    }
+}
+
 extension UINavigationController: UINavigationBarDelegate {
     
     public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
@@ -176,8 +208,12 @@ extension UINavigationController: UINavigationBarDelegate {
         let itemCount = navigationBar.items?.count ?? 0
         let n = viewControllers.count >= itemCount ? 2 : 1
         let popToVC = viewControllers[viewControllers.count - n]
-        
-        popToViewController(popToVC, animated: true)
+        if #available(iOS 13.0, *) {
+            setNeedsNavigationBackground(alpha: popToVC.navBarBgAlpha)
+            navigationBar.tintColor = popToVC.navBarTintColor
+        } else {
+            popToViewController(popToVC, animated: true)
+        }
         return true
     }
     
